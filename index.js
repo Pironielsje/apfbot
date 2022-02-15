@@ -82,6 +82,18 @@ client.on("interactionCreate", async(interaction) => {
                 interaction.reply({ content: "I've edited the meme", ephemeral: true })
             })
         }
+
+        if(interaction.customId === "information") {
+            const infoHelp = new MessageEmbed()
+                .setTitle("📜 Information")
+                .setColor("RANDOM")
+                .setFields(
+                    {name: "help", value: "**Shows the help embed** [aliases: \"h, helpme, commands\"]"},
+                    {name: "botinfo", value: "**Returns the info of the bot** [aliases: \"bi, binfo\"]"},
+                    {name: "ping", value: "**Shows the ping** [aliases: \"pong, p, pingpong\"]"},
+                    {name: "youtube", value: "**Shows the youtube channel of the creator** [aliases: \"yt\"]"}
+                )
+        }
     }
 })
 
