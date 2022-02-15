@@ -93,6 +93,11 @@ client.on("interactionCreate", async(interaction) => {
                     {name: "ping", value: "**Shows the ping** [aliases: \"pong, p, pingpong\"]"},
                     {name: "youtube", value: "**Shows the youtube channel of the creator** [aliases: \"yt\"]"}
                 )
+                .setFooter(`Requested by: ${interaction.user.username}`, interaction.user.displayAvatarURL())
+                .setTimestamp()
+
+            interaction.edit({embeds: [infoHelp]})
+            interaction.reply({content: "Need more help? Contact the dev: Niels#8069", ephemeral: true})
         }
     }
 })
