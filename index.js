@@ -1,5 +1,4 @@
 const { Client, Intents, Collection, MessageEmbed } = require('discord.js')
-const config = require('./config.json')
 const fs = require('fs')
 const db = require('quick.db')
 const redditfetch = require('reddit-fetch')
@@ -86,4 +85,4 @@ client.on("interactionCreate", async(interaction) => {
     }
 })
 
-client.login(config.token)
+client.login(process.env.TOKEN)
