@@ -62,8 +62,7 @@ client.on("messageCreate", async(msg) => {
 })
 
 client.on("interactionCreate", async(interaction) => {
-    if (interaction.isButton) {
-        if (interaction.customId === "nextmeme") {
+        if (interaction.customId === "nextmeme" && interaction.isButton) {
             redditfetch({
                 subreddit: "memes" || "dankmemes",
                 sort: "hot",
@@ -83,7 +82,7 @@ client.on("interactionCreate", async(interaction) => {
             })
         }
 
-        if(interaction.customId === "information") {
+        if(interaction.customId === "information" && interaction.isButton) {
             const infoHelp = new MessageEmbed()
                 .setTitle("📜 Information")
                 .setColor("RANDOM")
@@ -96,10 +95,9 @@ client.on("interactionCreate", async(interaction) => {
                 .setFooter(`Requested by: ${interaction.user.username}`, interaction.user.displayAvatarURL())
                 .setTimestamp()
 
-            interaction.edit({embeds: [infoHelp]})
+            interaction.message.edit({embeds: [infoHelp]})
             interaction.reply({content: "Need more help? Contact the dev: Niels#8069", ephemeral: true})
         }
-    }
 })
 
 client.login(process.env.TOKEN)
