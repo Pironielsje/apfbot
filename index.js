@@ -45,14 +45,14 @@ client.on("messageCreate", async(msg) => {
 
     if (msg.author.bot) return
 
-    let prefix = commandprefix.findOne({
+    let guildPrefix = commandprefix.findOne({
         _id: msg.guild.id,
         prefix
     })
 
     let defautprefix = process.env.DEFPREFIX
 
-    if (prefix === null) prefix = defautprefix
+    if (guildPrefix === null) guildPrefix = defautprefix
 
     if (!msg.content.startsWith(prefix)) return
 
