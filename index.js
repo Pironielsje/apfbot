@@ -44,7 +44,7 @@ client.on("messageCreate", async(msg) => {
 
     if (msg.author.bot) return
 
-    let prefix = db.get(`${msg.guild.id}_prefix`);
+    let prefix = db.get(`${msg.guild.id}_prefix`)
 
     let defautprefix = process.env.DEFPREFIX
 

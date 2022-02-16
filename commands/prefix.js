@@ -1,10 +1,26 @@
-const db = require('quick.db')
+const mongo = require('../index')
+const commandPrefixSchema = require('../models/command-prefix')
 
 module.exports.run = async(client, msg, args) => {
 
     if (!args[0]) return msg.reply(`Please give me a prefix to change it to!`)
 
-    db.set(`${msg.guild.id}_prefix`, args[0])
+    if(!msg.member.permissions.has("ADMINISTRATOR")) msg.reply(`You have to be administrator to use this!`)
+
+    await mongo().then(async mongoose => {
+        try {
+            await commandPrefixSchema.findOneAndUpdate({
+                _id: msg.guild.id
+            }, {
+                _id: msg.guild.id,
+                prefix: args[0]
+            }, {
+                upsert: true
+            })
+        } finally {
+            mongoose.connection.close()
+        }
+    })
 
     msg.reply(`I've changed the prefix to: **${args[0]}**`)
 
