@@ -3,6 +3,7 @@ const fs = require('fs')
 const db = require('quick.db')
 const redditfetch = require('reddit-fetch')
 const mongoose = require('mongoose')
+const commandprefix = require('./models/command-prefix')
 
 const client = new Client({
     intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES]
@@ -44,7 +45,10 @@ client.on("messageCreate", async(msg) => {
 
     if (msg.author.bot) return
 
-    let prefix = db.get(`${msg.guild.id}_prefix`)
+    let prefix = commandprefix.findOne({
+        _id: msg.guild.id,
+        prefix
+    })
 
     let defautprefix = process.env.DEFPREFIX
 
