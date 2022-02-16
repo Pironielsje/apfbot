@@ -2,6 +2,7 @@ const { Client, Intents, Collection, MessageEmbed } = require('discord.js')
 const fs = require('fs')
 const db = require('quick.db')
 const redditfetch = require('reddit-fetch')
+const mongoose = require('mongoose')
 
 const client = new Client({
     intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES]
@@ -25,6 +26,14 @@ for (const file of cmdFiles) {
 
 }
 
+mongoose.connect(process.env.MONGODBSRV, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false
+}).then(() => {
+    console.log(`Connected to database!`)
+})
+
 client.once('ready', () => {
     console.log("Ready")
     client.user.setActivity("At school 🙄")
@@ -36,7 +45,7 @@ client.on("messageCreate", async(msg) => {
 
     let prefix = db.get(`${msg.guild.id}_prefix`);
 
-    let defautprefix = db.set(`defaultprefix`, ';')
+    let defautprefix = process.env.DEFPREFIX
 
     if (prefix === null) prefix = defautprefix
 
