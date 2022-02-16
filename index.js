@@ -28,8 +28,7 @@ for (const file of cmdFiles) {
 
 mongoose.connect(process.env.MONGODBSRV, {
     useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false
+    useUnifiedTopology: true
 }).then(() => {
     console.log(`Connected to database!`)
 }).catch((error) => {
