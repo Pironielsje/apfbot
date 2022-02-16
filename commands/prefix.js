@@ -1,4 +1,4 @@
-const mongo = require('../index')
+const mongoose = require('mongoose')
 const commandPrefixSchema = require('../models/command-prefix')
 
 module.exports.run = async(client, msg, args) => {
@@ -7,7 +7,7 @@ module.exports.run = async(client, msg, args) => {
 
     if(!msg.member.permissions.has("ADMINISTRATOR")) msg.reply(`You have to be administrator to use this!`)
 
-    await mongo().then(async mongoose => {
+
         try {
             await commandPrefixSchema.findOneAndUpdate({
                 _id: msg.guild.id
@@ -20,7 +20,6 @@ module.exports.run = async(client, msg, args) => {
         } finally {
             mongoose.connection.close()
         }
-    })
 
     msg.reply(`I've changed the prefix to: **${args[0]}**`)
 
