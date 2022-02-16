@@ -32,6 +32,8 @@ mongoose.connect(process.env.MONGODBSRV, {
     useFindAndModify: false
 }).then(() => {
     console.log(`Connected to database!`)
+}).catch((error) => {
+    console.log(console.log(error))
 })
 
 client.once('ready', () => {
